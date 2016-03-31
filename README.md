@@ -4,15 +4,15 @@ von Matthias Mischek (TGM 4AHITM)
 
 Ich habe folgende Kopetenzen nicht erfüllt:
 
-Anwendungsentwicklung: können einfache Schnittstellen zur Kommunikation zwischen Anwendungen entwerfen und implementieren
+Anwendungsentwicklung: können einfache Schnittstellen zur Kommunikation zwischen Anwendungen entwerfen und implementieren.
 
-Ferner wäre es sinnvoll folgende Kompetenz ebenfalls nachzubringen: können umfangreiche Client-Server Anwendungen entwickeln
+Ferner wäre es sinnvoll folgende Kompetenz ebenfalls nachzubringen: können umfangreiche Client-Server Anwendungen entwickeln.
 
 
 Daher werde ich folgenden Teil der Semesteraufgabe "Fussballverein" erledigen:
 
 
-Datenbankclient (Java/C++) und DB-Connector (JDBC/libpqxx):
+# Datenbankclient (Java/C++) und DB-Connector (JDBC/libpqxx):
 
 Schreiben Sie einen Client, der eine Datenbank-Verbindung herstellt. Realisieren Sie eine GUI (JavaFX/Qt), die das einfache Ändern (CRUD) der Spieler des Vereins erlaubt. Verwenden Sie dabei auf jeden Fall eine Tabelle (TableView, QTableView), die auch eine grafische Veränderung der Datensätze erlauben soll.
 
