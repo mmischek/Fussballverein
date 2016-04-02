@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="308.0" prefWidth="429.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="390.0" prefWidth="538.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
    <children>
-      <Label layoutX="149.0" layoutY="76.0" text="Das ist der erste Test" />
+      <TextField fx:id="eingabe" layoutX="77.0" layoutY="47.0" />
+      <Button fx:id="start" layoutX="353.0" layoutY="47.0" mnemonicParsing="false" onAction="#schoko" text="start" />
+      <TextArea fx:id="ausgabe" layoutX="34.0" layoutY="82.0" prefHeight="291.0" prefWidth="464.0" />
    </children>
 </AnchorPane>
