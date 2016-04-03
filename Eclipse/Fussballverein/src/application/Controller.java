@@ -51,7 +51,7 @@ public class Controller implements Initializable{
 	
 	@SuppressWarnings("rawtypes")
 	@FXML
-	private TableView ausgabe, updateTable, anzeige;
+	private TableView ausgabe, anzeige;
 	
 	@FXML
 	private TextField eingabe, updateTextfield;
@@ -302,7 +302,7 @@ public void abfrage(ActionEvent event){
             });
 
             ausgabe.getColumns().addAll(col); 
-            updateTable.getColumns().addAll(col); 
+           
 
         }
 		
@@ -319,7 +319,6 @@ public void abfrage(ActionEvent event){
 		}
 		
 		ausgabe.setItems(data);
-		updateTable.setItems(data);
 		
 		
 	}catch (PSQLException se){
