@@ -101,11 +101,17 @@ public class Controller implements Initializable{
 			anzeigePane.setDisable(false);
 			insertPane.setDisable(false);
 			
-			}catch (Exception se){
+			}catch (PSQLException e) {
+				System.err.println("Error");
+				status.setText("Bitter erneut versuchen.");
+				
+			}
+			catch (Exception se){
 			System.err.println("Error");
-			status.setText("Bitter erneut versuchen.");
+			status.setText("Bitte erneut versuchen.");
 			
 		}
+		
 		
 	}
 	
