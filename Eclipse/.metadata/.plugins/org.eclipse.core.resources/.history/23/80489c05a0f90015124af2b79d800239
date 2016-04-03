@@ -64,7 +64,8 @@ public class Controller implements Initializable{
 	private PGSimpleDataSource ds;
 
 
-	public void connect(ActionEvent event){
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public void abfrage(ActionEvent event){
 		
 		data = FXCollections.observableArrayList();
 		
@@ -75,27 +76,6 @@ public class Controller implements Initializable{
 		ds.setUser(user.getText());
 		ds.setPassword(passwort.getText());
 		// Verbindung herstellen
-		try(
-			Connection con = ds.getConnection();
-			
-			){
-			
-			status.setText("Verbunden!");
-			abfragePane.setDisable(false);
-			updatePane.setDisable(false);
-			
-			}catch (Exception se){
-			System.err.println("Error");
-			status.setText("Bitter erneut versuchen.");
-			
-		}
-		
-	}
-	
-
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public void abfrage(ActionEvent event){
-		
 		try(
 			Connection con = ds.getConnection();
 			// Abfrage vorbereiten und ausführen
@@ -141,15 +121,36 @@ public class Controller implements Initializable{
 			selectText.setText("Error. Bitte korrigieren Sie ihre Eingabe.");
 			
 		}
+	}
+
+	
+	
+
+	public void connect(ActionEvent event){
 		
+		data = FXCollections.observableArrayList();
 		
+		// Datenquelle erzeugen und konfigurieren
+		ds = new PGSimpleDataSource();
+		ds.setServerName(ip.getText());
+		ds.setDatabaseName(dbName.getText());
+		ds.setUser(user.getText());
+		ds.setPassword(passwort.getText());
+		// Verbindung herstellen
+		try(
+			Connection con = ds.getConnection();
+			
+			){
+			
+			status.setText("Verbunden!");
+			abfragePane.setDisable(false);
+			updatePane.setDisable(false);
+			
+			}catch (Exception se){
+			System.err.println("Error");
+			status.setText("Bitter erneut versuchen.");
+			
+		}
 		
 	}
-	
-	
-	
-
-	
-	
-
 }

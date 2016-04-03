@@ -141,13 +141,7 @@ public class Controller implements Initializable{
 			selectText.setText("Error. Bitte korrigieren Sie ihre Eingabe.");
 			
 		}
-		
-		
-		
 	}
-	
-	
-	
 
 	
 	
