@@ -1,12 +1,5 @@
 package application;
 	
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-
-import org.postgresql.ds.PGSimpleDataSource;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -14,7 +7,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 
 
-
+/**
+ * 
+ * @author Matthias
+ * Main
+ */
 public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
