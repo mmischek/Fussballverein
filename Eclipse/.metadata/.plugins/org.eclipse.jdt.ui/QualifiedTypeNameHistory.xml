@@ -25,4 +25,9 @@
 <fullyQualifiedTypeName name="javafx.scene.control.TitledPane"/>
 <fullyQualifiedTypeName name="org.postgresql.util.PSQLException"/>
 <fullyQualifiedTypeName name="javafx.scene.control.Tab"/>
+<fullyQualifiedTypeName name="javafx.scene.control.TablePosition"/>
+<fullyQualifiedTypeName name="javafx.scene.control.TableView.TableViewSelectionModel"/>
+<fullyQualifiedTypeName name="javax.swing.event.ChangeListener"/>
+<fullyQualifiedTypeName name="javafx.scene.control.ComboBox"/>
+<fullyQualifiedTypeName name="java.sql.SQLException"/>
 </qualifiedTypeNameHistroy>
