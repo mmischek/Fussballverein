@@ -58,6 +58,8 @@
 		<item value="2" key="pageIndex"/>
 	</section>
 	<section name="quick_assist_proposal_size">
+		<item value="725" key="size.y"/>
+		<item value="1280" key="size.x"/>
 	</section>
 	<section name="NewPackageWizardPage">
 		<item value="false" key="create_package_info_java"/>

@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
 
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import org.postgresql.ds.PGSimpleDataSource;
 import org.postgresql.util.PSQLException;
@@ -25,7 +27,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
+import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.control.TextField;
 import javafx.util.Callback;
 
@@ -53,7 +57,7 @@ public class Controller implements Initializable{
 	private TextField eingabe, updateTextfield;
 	
 	@FXML
-	private Button start, connectButton, auswahl, updateB, auswahlB, anzeigeB, dbeinfugen;
+	private Button start, connectButton, auswahl, updateB, auswahlB;
 	
 	@FXML
 	private TextField ip, dbName, user, passwort, insnname, insvname, insNr, pnr, vname, nname;
@@ -66,7 +70,6 @@ public class Controller implements Initializable{
 	
 	private PGSimpleDataSource ds;
 	
-	@SuppressWarnings("rawtypes")
 	@FXML
 	private ComboBox updateBox;
 	
@@ -157,8 +160,6 @@ public class Controller implements Initializable{
 	public void anzeige(ActionEvent event){
 		
 		try{
-			anzeigeB.setDisable(true);
-			dbeinfugen.setDisable(true);
 			
 			con = ds.getConnection();
 			// Abfrage vorbereiten und ausführen
@@ -221,7 +222,7 @@ public class Controller implements Initializable{
 	public void update(ActionEvent event){
 
 		try{
-			aktualisieren(event);
+			aktualisieren();
 			Connection con = ds.getConnection();
 			// Abfrage vorbereiten und ausführen
 			Statement st = con.createStatement();
@@ -262,8 +263,6 @@ public class Controller implements Initializable{
 	
 	@FXML
 	public void aktualisieren(ActionEvent event){
-		anzeigeB.setDisable(false);
-		dbeinfugen.setDisable(false );
 
 		anzeige.getColumns().clear();
 

@@ -1,13 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<TabPane prefHeight="492.0" prefWidth="712.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
+<TabPane prefHeight="580.0" prefWidth="712.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
    <tabs>
+      <Tab text="Angabe">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="577.0" prefWidth="712.0">
+               <children>
+                  <Label layoutX="220.0" layoutY="34.0" text="SEMESTERSTERAUFGABE" textFill="#1078a1">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Label>
+                  <TextArea layoutX="14.0" layoutY="85.0" prefHeight="433.0" prefWidth="691.0" text="# Fussballverein&#10;von Matthias Mischek (TGM 4AHITM)&#10;&#10;Ich habe folgende Kopetenzen nicht erfüllt:&#10;&#10;Anwendungsentwicklung: können einfache Schnittstellen zur Kommunikation zwischen Anwendungen entwerfen und implementieren.&#10;&#10;Ferner wäre es sinnvoll folgende Kompetenz ebenfalls nachzubringen: können umfangreiche Client-Server Anwendungen entwickeln.&#10;&#10;&#10;Daher werde ich folgenden Teil der Semesteraufgabe &quot;Fussballverein&quot; erledigen:&#10;&#10;&#10;# Datenbankclient (Java/C++) und DB-Connector (JDBC/libpqxx):&#10;&#10;Schreiben Sie einen Client, der eine Datenbank-Verbindung herstellt. Realisieren Sie eine GUI (JavaFX/Qt), die das einfache Ändern (CRUD) der Spieler des Vereins erlaubt. Verwenden Sie dabei auf jeden Fall eine Tabelle (TableView, QTableView), die auch eine grafische Veränderung der Datensätze erlauben soll.&#10;&#10;Ermöglichen Sie die gleichzeitige Verbindung von mehreren Clients auf die Datenbasis. Implementieren Sie dabei eine transaktionelle, gesicherte Erstellung und Änderung von Spielen. Beachten Sie dabei, dass der Spielstand und die Spielzeit der einzelnen Spieler laufend und von mehreren Clients gleichzeitig aktualisiert werden könnte. Stellen Sie für die Eingabe der Spielerzeit und Spielstand eine einfache grafische Möglichkeit zur Verfügung. Verwenden Sie dabei Transaktionen bzw. Locks und entsprechende programmtechnische Mittel um Inkonsistenzen zu vermeiden. Definieren Sie dabei für die einzelnen Informationen (Spielerzeit, Spielstand) eigene Threads.&#10;" wrapText="true" />
+               </children>
+            </AnchorPane>
+        </content>
+      </Tab>
       <Tab fx:id="verbinden" text="Verbinden">
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="256.0" prefWidth="361.0">
@@ -21,7 +36,7 @@
                   <Label layoutX="167.0" layoutY="191.0" text="Benutzername:" />
                   <Label layoutX="199.0" layoutY="233.0" text="Passwort:" />
                   <Button fx:id="connectButton" layoutX="292.0" layoutY="331.0" mnemonicParsing="false" onAction="#connect" text="Verbinden" />
-                  <Label layoutX="115.0" layoutY="28.0" text="Willkommen zu meiner Semesteraufgabe!">
+                  <Label layoutX="275.0" layoutY="38.0" text="Verbinden">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -35,9 +50,10 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <TableView fx:id="anzeige" layoutX="18.0" layoutY="71.0" prefHeight="356.0" prefWidth="677.0" />
-                  <Button fx:id="anzeigeB" layoutX="202.0" layoutY="25.0" mnemonicParsing="false" onAction="#anzeige" prefHeight="27.0" prefWidth="309.0" text="DB anzeigen" />
-                  <Button layoutX="57.0" layoutY="25.0" mnemonicParsing="false" onAction="#aktualisieren" text="Anzeige löschen" />
+                  <TableView fx:id="anzeige" layoutX="16.0" layoutY="133.0" prefHeight="356.0" prefWidth="677.0" />
+                  <Button fx:id="anzeigeB" layoutX="315.0" layoutY="81.0" mnemonicParsing="false" onAction="#anzeige" prefHeight="27.0" prefWidth="309.0" text="DB anzeigen" />
+                  <Button layoutX="74.0" layoutY="78.0" mnemonicParsing="false" onAction="#aktualisieren" text="Anzeige löschen" />
+                  <Text layoutX="101.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Um die Tabelle &quot;Person&quot; der SchokoDB anzuzeigen klicken Sie auf &quot;DB anzeigen&quot;" wrappingWidth="505.05780029296875" />
                </children>
             </AnchorPane>
         </content>
@@ -57,7 +73,12 @@
                         <Label layoutX="155.0" layoutY="187.0" text="Nummer" />
                         <Button fx:id="updateB" disable="true" layoutX="327.0" layoutY="403.0" mnemonicParsing="false" onAction="#update" text="update" />
                         <Button fx:id="auswahlB" disable="true" layoutX="577.0" layoutY="117.0" mnemonicParsing="false" onAction="#auswahl" text="auswahl" />
-                        <Button layoutX="32.0" layoutY="65.0" mnemonicParsing="false" onAction="#anzeige" text="DB einfügen" />
+                        <Button fx:id="dbeinfugen" layoutX="32.0" layoutY="65.0" mnemonicParsing="false" onAction="#anzeige" text="DB laden" />
+                        <Text layoutX="278.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="UPDATE" wrappingWidth="107.67694091796875">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Text>
                      </children>
                   </AnchorPane>
               </items>
@@ -68,14 +89,19 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <TextField fx:id="insNr" layoutX="219.0" layoutY="102.0" />
-                  <TextField fx:id="insvname" layoutX="219.0" layoutY="175.0" />
-                  <TextField fx:id="insnname" layoutX="219.0" layoutY="253.0" />
-                  <Label layoutX="68.0" layoutY="107.0" text="Nummer" />
-                  <Label layoutX="59.0" layoutY="180.0" text="Vorname" />
-                  <Label layoutX="40.0" layoutY="258.0" text="Nachname" />
-                  <Button fx:id="insertB" layoutX="259.0" layoutY="344.0" mnemonicParsing="false" onAction="#insert" text="hinzufügen" />
-                  <Label fx:id="hinzText" layoutX="198.0" layoutY="308.0" text="Es wurde noch nichts hinzugefügt" />
+                  <TextField fx:id="insNr" layoutX="340.0" layoutY="134.0" />
+                  <TextField fx:id="insvname" layoutX="340.0" layoutY="207.0" />
+                  <TextField fx:id="insnname" layoutX="340.0" layoutY="285.0" />
+                  <Label layoutX="189.0" layoutY="139.0" text="Nummer" />
+                  <Label layoutX="180.0" layoutY="212.0" text="Vorname" />
+                  <Label layoutX="161.0" layoutY="290.0" text="Nachname" />
+                  <Button fx:id="insertB" layoutX="324.0" layoutY="406.0" mnemonicParsing="false" onAction="#insert" text="hinzufügen" />
+                  <Label fx:id="hinzText" layoutX="262.0" layoutY="354.0" text="Es wurde noch nichts hinzugefügt" />
+                  <Text layoutX="297.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="INSERT">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
                </children>
             </AnchorPane>
         </content>
