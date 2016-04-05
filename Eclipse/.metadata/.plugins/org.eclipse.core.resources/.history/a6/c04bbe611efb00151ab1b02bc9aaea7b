@@ -132,12 +132,15 @@ public class Controller implements Initializable{
 			   int num = Integer.parseInt(insNr.getText());
 			   String vnam = insvname.getText();
 			   String nnam = insnname.getText();
-	try{
+
+		
+		try{
 			
 			Statement st = con.createStatement();
 			st.executeUpdate("INSERT INTO Person VALUES (" + num + ", '" + vnam + "', '" + nnam + "')");
 			hinzText.setText("erfolgreich hinzugefügt!");
 		
+			
 			
 		}catch (PSQLException se){
 			System.err.println("Error");
@@ -245,6 +248,8 @@ public class Controller implements Initializable{
 			Statement st = con.createStatement();
 			st.executeUpdate("UPDATE person SET vorname=\'"+vname.getText()+"\', nachname=\'"+nname.getText()+"\', nummer=\'"+pnr.getText()+"\' WHERE nummer=\'"+updatear[0]+"\'");
 
+			System.out.println("Update successful");
+
 		} catch (SQLException se){
 			System.err.println("Update - Error");
 			se.printStackTrace(System.err);
@@ -269,6 +274,8 @@ public class Controller implements Initializable{
 			Statement st = con.createStatement();
 			st.executeUpdate("DELETE FROM person WHERE nummer=\'"+updatear[0]+"\'");
 
+			System.out.println("Delete successful");
+
 		} catch (SQLException se){
 			System.err.println("Delete - Error");
 			se.printStackTrace(System.err);
@@ -289,11 +296,17 @@ public class Controller implements Initializable{
 		input = input.substring(1,input.length()-1);
 
 		updatear = input.split(", ");
+
+		System.out.println(input);
+
 		updateB.setDisable(false);
 
 		pnr.setText(updatear[0]);
 		vname.setText(updatear[1]);
 		nname.setText(updatear[2]);
+
+		//bezeichnungTF.setDisable(false);
+		//gewichtTF.setDisable(false);
 
 	}
 	

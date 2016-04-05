@@ -23,7 +23,7 @@
             </AnchorPane>
         </content>
       </Tab>
-      <Tab fx:id="verbinden" text="Verbinden">
+      <Tab text="Verbinden">
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="256.0" prefWidth="361.0">
                <children>
@@ -58,7 +58,7 @@
             </AnchorPane>
         </content>
       </Tab>
-      <Tab fx:id="updatePane" disable="true" text="Update">
+      <Tab fx:id="updatePane" disable="true" text="Update/Delete">
          <content>
             <SplitPane prefHeight="160.0" prefWidth="200.0">
               <items>
@@ -71,14 +71,16 @@
                         <Label layoutX="125.0" layoutY="316.0" text="Nachname" />
                         <Label layoutX="148.0" layoutY="252.0" text="Vorname" />
                         <Label layoutX="155.0" layoutY="187.0" text="Nummer" />
-                        <Button fx:id="updateB" disable="true" layoutX="327.0" layoutY="403.0" mnemonicParsing="false" onAction="#update" text="update" />
+                        <Button fx:id="updateB" disable="true" layoutX="279.0" layoutY="403.0" mnemonicParsing="false" onAction="#update" text="update" />
                         <Button fx:id="auswahlB" disable="true" layoutX="577.0" layoutY="117.0" mnemonicParsing="false" onAction="#auswahl" text="auswahl" />
                         <Button fx:id="dbeinfugen" layoutX="32.0" layoutY="65.0" mnemonicParsing="false" onAction="#anzeige" text="DB laden" />
-                        <Text layoutX="278.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="UPDATE" wrappingWidth="107.67694091796875">
+                        <Text layoutX="256.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="UPDATE/DELETE" wrappingWidth="200.67694091796875">
                            <font>
                               <Font size="24.0" />
                            </font>
                         </Text>
+                        <Button fx:id="deleteB" disable="true" layoutX="381.0" layoutY="403.0" mnemonicParsing="false" onAction="#delete" text="delete" />
+                        <Label fx:id="status2" layoutX="273.0" layoutY="356.0" text="Bitte update oder delete wählen." />
                      </children>
                   </AnchorPane>
               </items>
@@ -96,12 +98,12 @@
                   <Label layoutX="180.0" layoutY="212.0" text="Vorname" />
                   <Label layoutX="161.0" layoutY="290.0" text="Nachname" />
                   <Button fx:id="insertB" layoutX="324.0" layoutY="406.0" mnemonicParsing="false" onAction="#insert" text="hinzufügen" />
-                  <Label fx:id="hinzText" layoutX="262.0" layoutY="354.0" text="Es wurde noch nichts hinzugefügt" />
                   <Text layoutX="297.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="INSERT">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Text>
+                  <Label fx:id="hinzText" layoutX="252.0" layoutY="366.0" text="Es wurde noch nichts hinzugefügt" />
                </children>
             </AnchorPane>
         </content>

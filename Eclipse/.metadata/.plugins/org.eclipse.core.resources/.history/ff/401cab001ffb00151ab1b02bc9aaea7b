@@ -132,12 +132,15 @@ public class Controller implements Initializable{
 			   int num = Integer.parseInt(insNr.getText());
 			   String vnam = insvname.getText();
 			   String nnam = insnname.getText();
-	try{
+
+		
+		try{
 			
 			Statement st = con.createStatement();
 			st.executeUpdate("INSERT INTO Person VALUES (" + num + ", '" + vnam + "', '" + nnam + "')");
 			hinzText.setText("erfolgreich hinzugefügt!");
 		
+			
 			
 		}catch (PSQLException se){
 			System.err.println("Error");
