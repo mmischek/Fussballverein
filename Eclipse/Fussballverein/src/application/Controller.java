@@ -169,23 +169,17 @@ public class Controller implements Initializable{
 	public void anzeige(ActionEvent event){
 		
 		try{
-			anzeigeB.setDisable(true);
-			delete.setDisable(true);
-			dbeinfugen.setDisable(true);
 			
 			con = ds.getConnection();
 			// Abfrage vorbereiten und ausführen
 			Statement st = con.createStatement();
-			ResultSet rs = st.executeQuery("select * from Person");
+				ResultSet rs = st.executeQuery("select * from Person");
 			
 			pnr.setDisable(false);
 			vname.setDisable(false);
 			nname.setDisable(false);
 			auswahlB.setDisable(false);
 			
-			/**
-			 * "Formatiert" Daten für Tabelle
-			 */
 			for(int i=0 ; i<rs.getMetaData().getColumnCount(); i++){
                 final int j = i;
 				TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i+1));
@@ -195,7 +189,7 @@ public class Controller implements Initializable{
                     }                    
                 });
 
-                anzeige.getColumns().addAll(col); //Spaltenname einfügen
+                anzeige.getColumns().addAll(col); 
               
     
             }
@@ -211,7 +205,7 @@ public class Controller implements Initializable{
               
                 data.add(row);
 			}
-			updateBox.setItems(data);//Datensätze einfügen
+			updateBox.setItems(data);
 			anzeige.setItems(data);
 			
 			
@@ -226,6 +220,10 @@ public class Controller implements Initializable{
 			selectText.setText("Error. Bitte korrigieren Sie ihre Eingabe.");
 			
 		}
+	
+	
+	
+	
 
 	}
 	
