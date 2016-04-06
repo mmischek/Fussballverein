@@ -27,7 +27,7 @@
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="256.0" prefWidth="361.0">
                <children>
-                  <TextField fx:id="ip" layoutX="291.0" layoutY="109.0" text="172.17.0.160" />
+                  <TextField fx:id="ip" layoutX="291.0" layoutY="109.0" text="172.16.231.133" />
                   <TextField fx:id="dbName" layoutX="291.0" layoutY="149.0" text="schokofabrik" />
                   <TextField fx:id="user" layoutX="291.0" layoutY="186.0" text="schokouser" />
                   <PasswordField fx:id="passwort" layoutX="291.0" layoutY="228.0" text="schokoUser" />
@@ -65,13 +65,14 @@
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                      <children>
                         <ComboBox fx:id="updateBox" layoutX="32.0" layoutY="117.0" prefHeight="27.0" prefWidth="509.0" />
-                        <TextField fx:id="nname" disable="true" layoutX="273.0" layoutY="311.0" />
-                        <TextField fx:id="vname" disable="true" layoutX="273.0" layoutY="247.0" />
                         <TextField fx:id="pnr" disable="true" layoutX="273.0" layoutY="182.0" />
+                        <TextField fx:id="vname" disable="true" layoutX="273.0" layoutY="247.0" />
+                        <TextField fx:id="nname" disable="true" layoutX="273.0" layoutY="311.0" prefHeight="28.0" prefWidth="169.0" />
+                        <Button fx:id="updateB" disable="true" layoutX="279.0" layoutY="403.0" mnemonicParsing="false" onAction="#update" text="update" />
+                        <Button fx:id="deleteB" disable="true" layoutX="381.0" layoutY="403.0" mnemonicParsing="false" onAction="#delete" text="delete" />
                         <Label layoutX="125.0" layoutY="316.0" text="Nachname" />
                         <Label layoutX="148.0" layoutY="252.0" text="Vorname" />
                         <Label layoutX="155.0" layoutY="187.0" text="Nummer" />
-                        <Button fx:id="updateB" disable="true" layoutX="279.0" layoutY="403.0" mnemonicParsing="false" onAction="#update" text="update" />
                         <Button fx:id="auswahlB" disable="true" layoutX="577.0" layoutY="117.0" mnemonicParsing="false" onAction="#auswahl" text="auswahl" />
                         <Button fx:id="dbeinfugen" layoutX="32.0" layoutY="65.0" mnemonicParsing="false" onAction="#anzeige" text="DB laden" />
                         <Text layoutX="256.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="UPDATE/DELETE" wrappingWidth="200.67694091796875">
@@ -79,7 +80,6 @@
                               <Font size="24.0" />
                            </font>
                         </Text>
-                        <Button fx:id="deleteB" disable="true" layoutX="381.0" layoutY="403.0" mnemonicParsing="false" onAction="#delete" text="delete" />
                         <Label fx:id="status2" layoutX="273.0" layoutY="356.0" text="Bitte update oder delete wählen." />
                      </children>
                   </AnchorPane>
@@ -94,10 +94,10 @@
                   <TextField fx:id="insNr" layoutX="340.0" layoutY="134.0" />
                   <TextField fx:id="insvname" layoutX="340.0" layoutY="207.0" />
                   <TextField fx:id="insnname" layoutX="340.0" layoutY="285.0" />
+                  <Button fx:id="insertB" layoutX="324.0" layoutY="406.0" mnemonicParsing="false" onAction="#insert" text="hinzufügen" />
                   <Label layoutX="189.0" layoutY="139.0" text="Nummer" />
                   <Label layoutX="180.0" layoutY="212.0" text="Vorname" />
                   <Label layoutX="161.0" layoutY="290.0" text="Nachname" />
-                  <Button fx:id="insertB" layoutX="324.0" layoutY="406.0" mnemonicParsing="false" onAction="#insert" text="hinzufügen" />
                   <Text layoutX="297.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="INSERT">
                      <font>
                         <Font size="24.0" />
@@ -112,11 +112,11 @@
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="start" layoutX="624.0" layoutY="30.0" mnemonicParsing="false" onAction="#abfrage" text="EINGABE" />
                   <TextField fx:id="eingabe" layoutX="373.0" layoutY="30.0" prefHeight="27.0" prefWidth="226.0" />
+                  <Button fx:id="start" layoutX="624.0" layoutY="30.0" mnemonicParsing="false" onAction="#abfrage" text="EINGABE" />
+                  <TableView fx:id="ausgabe" layoutX="20.0" layoutY="89.0" prefHeight="356.0" prefWidth="677.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" />
                   <Label fx:id="selectText" layoutX="32.0" layoutY="35.0" text="Bitte geben Sie einen SELECT Befehl ein:" />
                   <Label layoutX="312.0" layoutY="35.0" text="SELECT" />
-                  <TableView fx:id="ausgabe" layoutX="20.0" layoutY="89.0" prefHeight="356.0" prefWidth="677.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" />
                </children>
             </AnchorPane>
          </content>

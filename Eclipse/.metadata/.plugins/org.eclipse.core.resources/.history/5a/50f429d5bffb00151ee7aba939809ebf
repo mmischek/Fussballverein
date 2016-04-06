@@ -8,8 +8,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
 
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
 import org.postgresql.ds.PGSimpleDataSource;
 import org.postgresql.util.PSQLException;
@@ -27,16 +25,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
-import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.control.TextField;
 import javafx.util.Callback;
 
 /**
  * 
  * @author Matthias Mischek
- * Controller
+ * 
  */
 public class Controller implements Initializable{
 
@@ -57,28 +53,35 @@ public class Controller implements Initializable{
 	private TextField eingabe, updateTextfield;
 	
 	@FXML
-	private Button start, connectButton, auswahl, updateB, auswahlB;
+	private Button start, connectButton, auswahl, updateB, auswahlB, anzeigeB, dbeinfugen, deleteB, insertB, delete;
 	
 	@FXML
 	private TextField ip, dbName, user, passwort, insnname, insvname, insNr, pnr, vname, nname;
 	
 	@FXML
-	private Label status, selectText, hinzText;
+	private Label status, selectText, hinzText, status2;
 	
 	@FXML
 	private Tab abfragePane, updatePane, anzeigePane, insertPane;
 	
 	private PGSimpleDataSource ds;
 	
+	@SuppressWarnings("rawtypes")
 	@FXML
-	private ComboBox updateBox;
+	private ComboBox updateBox,updateBox2;
 	
 	private String[] updatear;
 	
 	private Connection con;
 
 
-	public void connect(ActionEvent event){
+	/**
+	 * Methode zum Verbinden zur Datenbank
+	 * Zugangsdaten kann der User für ein TextField eingeben
+	 * @param event
+	 * @throws SQLException 
+	 */
+	public void connect(ActionEvent event) throws SQLException{
 		
 		data = FXCollections.observableArrayList();
 		
@@ -93,20 +96,23 @@ public class Controller implements Initializable{
 		
 		{
 			
-			this.con = ds.getConnection();
-			
+			this.con = ds.getConnection(); //Verbinden
+			con.setAutoCommit(false);
 			status.setText("Verbunden!");
 			abfragePane.setDisable(false);
 			updatePane.setDisable(false);
 			anzeigePane.setDisable(false);
 			insertPane.setDisable(false);
-			
+			con.commit();
+			//Exception handling
 			}catch (PSQLException e) {
+				con.rollback();
 				System.err.println("Error");
 				status.setText("Bitter erneut versuchen.");
 				
 			}
 			catch (Exception se){
+			con.rollback();
 			System.err.println("Error");
 			status.setText("Bitte erneut versuchen.");
 			
@@ -116,33 +122,41 @@ public class Controller implements Initializable{
 	}
 	
 
-
 	
-	
-	public void insert(ActionEvent event){
+	/**
+	 * Methode für Insert
+	 * Erstellt ein INSERT Statement und ließt Eingaben von User ein
+	 * Ich habe die Tabelle "Person" von der SchokoDB verwendet
+	 * @param event
+	 * @throws SQLException 
+	 */
+	public void insert(ActionEvent event) throws SQLException{
 		if (insNr.getText().matches("^-?\\d+$")) {
 
 		
 			   int num = Integer.parseInt(insNr.getText());
 			   String vnam = insvname.getText();
 			   String nnam = insnname.getText();
-
-		
-		try{
+	try{
 			
 			Statement st = con.createStatement();
+			
+			con.setAutoCommit(false);
+			
 			st.executeUpdate("INSERT INTO Person VALUES (" + num + ", '" + vnam + "', '" + nnam + "')");
 			hinzText.setText("erfolgreich hinzugefügt!");
 		
-			
+			con.commit();
 			
 		}catch (PSQLException se){
+			con.rollback();
 			System.err.println("Error");
 			selectText.setText("Error. Bitte korrigieren Sie ihre Eingabe.");
 			hinzText.setText("INSERT ERROR!");
 			
 		}
 		catch (Exception se){
+			con.rollback();
 			System.err.println("Error");
 			selectText.setText("Error. Bitte korrigieren Sie ihre Eingabe.");
 			hinzText.setText("INSERT ERROR!");
@@ -156,14 +170,22 @@ public class Controller implements Initializable{
 	}
 	}
 	
+	
+	/**
+	 * Methode zum Laden der Tabelle Person und fügt diese in eine TableView ein
+	 * 
+	 * @param event
+	 * @throws SQLException 
+	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public void anzeige(ActionEvent event){
+	public void anzeige(ActionEvent event) throws SQLException{
 		
 		try{
 			
 			con = ds.getConnection();
 			// Abfrage vorbereiten und ausführen
 			Statement st = con.createStatement();
+			con.setAutoCommit(false);
 				ResultSet rs = st.executeQuery("select * from Person");
 			
 			pnr.setDisable(false);
@@ -198,15 +220,17 @@ public class Controller implements Initializable{
 			}
 			updateBox.setItems(data);
 			anzeige.setItems(data);
-			
+			con.commit();
 			
 			
 		}catch (PSQLException se){
+			con.rollback();
 			System.err.println("Error");
 			selectText.setText("Error. Bitte korrigieren Sie ihre Eingabe.");
 			
 		}
 		catch (Exception se){
+			con.rollback();
 			System.err.println("Error");
 			selectText.setText("Error. Bitte korrigieren Sie ihre Eingabe.");
 			
@@ -218,17 +242,21 @@ public class Controller implements Initializable{
 
 	}
 	
+	/**
+	 * Methode für das Statement "Update"
+	 * Ändert Datensätze
+	 * @param event
+	 */
 	@FXML
 	public void update(ActionEvent event){
 
 		try{
-			anzeige(event);
+			status2.setText("Datensatz wurde erfolgreich geaendert!");
+			aktualisieren(event);
 			Connection con = ds.getConnection();
 			// Abfrage vorbereiten und ausführen
 			Statement st = con.createStatement();
 			st.executeUpdate("UPDATE person SET vorname=\'"+vname.getText()+"\', nachname=\'"+nname.getText()+"\', nummer=\'"+pnr.getText()+"\' WHERE nummer=\'"+updatear[0]+"\'");
-
-			System.out.println("Update successful");
 
 		} catch (SQLException se){
 			System.err.println("Update - Error");
@@ -237,7 +265,35 @@ public class Controller implements Initializable{
 
 	}
 	
+	/**
+	 * Methode für das Statement "Delete"
+	 * Löscht Datensätze aus der Tabelle
+	 * Damit delete eines datensatzes in der Personen Tabelle musste ich zuerst den Verweis zu mitarbeiter in der Schokodb löschen 
+	 * @param event
+	 */
+	@FXML
+	public void delete(ActionEvent event){
+
+		try{
+			status2.setText("Datensatz wurde erfolgreich geloescht!");
+			aktualisieren(event);
+			Connection con = ds.getConnection();
+			// Abfrage vorbereiten und ausführen
+			Statement st = con.createStatement();
+			st.executeUpdate("DELETE FROM person WHERE nummer=\'"+updatear[0]+"\'");
+
+		} catch (SQLException se){
+			System.err.println("Delete - Error");
+			se.printStackTrace(System.err);
+		}
+
+	}
 	
+	/**
+	 * Methode für die Auswahl der Datensätze bei Update und Insert 
+	 * ComboBox gibt Daten TextField
+	 * @param event
+	 */
 	@FXML
 	public void auswahl(ActionEvent event){
 
@@ -246,26 +302,24 @@ public class Controller implements Initializable{
 		input = input.substring(1,input.length()-1);
 
 		updatear = input.split(", ");
-
-		System.out.println(input);
-
 		updateB.setDisable(false);
 
 		pnr.setText(updatear[0]);
 		vname.setText(updatear[1]);
 		nname.setText(updatear[2]);
 
-		//bezeichnungTF.setDisable(false);
-		//gewichtTF.setDisable(false);
-
 	}
 	
-	
+	/**
+	 * Löscht Anzeige und Tabelle
+	 * @param event
+	 * @throws SQLException 
+	 */
 	@FXML
-	public void aktualisieren(ActionEvent event){
-
+	public void aktualisieren(ActionEvent event) throws SQLException{
+		anzeigeB.setDisable(false);
+		dbeinfugen.setDisable(false );
 		anzeige.getColumns().clear();
-
 		data.clear();
 		data = FXCollections.observableArrayList();
 		connect(null);
@@ -273,17 +327,10 @@ public class Controller implements Initializable{
 	}
 	
 	
-
-
-
-
-
-
-
-
-
-
-
+/**
+ * Methode für Eingabe von Select Befehlen
+ * @param event
+ */
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public void abfrage(ActionEvent event){
 	

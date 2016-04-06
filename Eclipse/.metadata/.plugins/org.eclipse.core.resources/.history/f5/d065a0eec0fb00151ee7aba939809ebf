@@ -174,8 +174,7 @@ public class Controller implements Initializable {
 			Statement st = con.createStatement();
 			con.setAutoCommit(false);
 			ResultSet rs = st.executeQuery("select * from Person");
-			anzeigeB.setDisable(true);
-			dbeinfugen.setDisable(true);
+
 			pnr.setDisable(false);
 			vname.setDisable(false);
 			nname.setDisable(false);

@@ -174,8 +174,7 @@ public class Controller implements Initializable {
 			Statement st = con.createStatement();
 			con.setAutoCommit(false);
 			ResultSet rs = st.executeQuery("select * from Person");
-			anzeigeB.setDisable(true);
-			dbeinfugen.setDisable(true);
+
 			pnr.setDisable(false);
 			vname.setDisable(false);
 			nname.setDisable(false);
@@ -291,13 +290,16 @@ public class Controller implements Initializable {
 	public void auswahl(ActionEvent event) {
 
 		String input = updateBox.getValue() + "";
+
 		input = input.substring(1, input.length() - 1);
+
 		updatear = input.split(", ");
 		updateB.setDisable(false);
-		deleteB.setDisable(false);
+
 		pnr.setText(updatear[0]);
 		vname.setText(updatear[1]);
 		nname.setText(updatear[2]);
+
 	}
 
 	/**
@@ -321,16 +323,14 @@ public class Controller implements Initializable {
 	 * Methode für Eingabe von Select Befehlen
 	 * 
 	 * @param event
-	 * @throws SQLException 
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public void abfrage(ActionEvent event) throws SQLException {
+	public void abfrage(ActionEvent event) {
 
 		try {
 			Connection con = ds.getConnection();
 			// Abfrage vorbereiten und ausführen
 			Statement st = con.createStatement();
-			con.setAutoCommit(false);
 			ResultSet rs = st.executeQuery("select " + eingabe.getText());
 
 			for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
@@ -360,16 +360,13 @@ public class Controller implements Initializable {
 			}
 
 			ausgabe.setItems(data);
-			con.commit();
 
 		} catch (PSQLException se) {
-			con.rollback();
-			System.err.println("Error PSQLException");
+			System.err.println("Error");
 			selectText.setText("Error. Bitte korrigieren Sie ihre Eingabe.");
 
 		} catch (Exception se) {
-			con.rollback();
-			System.err.println("Error Exception");
+			System.err.println("Error");
 			selectText.setText("Error. Bitte korrigieren Sie ihre Eingabe.");
 
 		}
