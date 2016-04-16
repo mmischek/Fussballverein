@@ -27,10 +27,10 @@
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="256.0" prefWidth="361.0">
                <children>
-                  <TextField fx:id="ip" layoutX="291.0" layoutY="109.0" text="172.16.231.133" />
-                  <TextField fx:id="dbName" layoutX="291.0" layoutY="149.0" text="schokofabrik" />
-                  <TextField fx:id="user" layoutX="291.0" layoutY="186.0" text="schokouser" />
-                  <PasswordField fx:id="passwort" layoutX="291.0" layoutY="228.0" text="schokoUser" />
+                  <TextField fx:id="ip" layoutX="291.0" layoutY="109.0" text="172.17.0.160" />
+                  <TextField fx:id="dbName" layoutX="291.0" layoutY="149.0" text="fussballverein" />
+                  <TextField fx:id="user" layoutX="291.0" layoutY="186.0" text="fussballuser" />
+                  <PasswordField fx:id="passwort" layoutX="291.0" layoutY="228.0" text="Fusspass" />
                   <Label layoutX="244.0" layoutY="114.0" text="IP:" />
                   <Label layoutX="197.0" layoutY="154.0" prefHeight="17.0" prefWidth="77.0" text="DB Name:" />
                   <Label layoutX="167.0" layoutY="191.0" text="Benutzername:" />
@@ -58,36 +58,39 @@
             </AnchorPane>
         </content>
       </Tab>
-      <Tab fx:id="updatePane" disable="true" text="Update/Delete">
+      <Tab fx:id="updatePane" disable="true" text="Update Spieler">
          <content>
             <SplitPane prefHeight="160.0" prefWidth="200.0">
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                      <children>
-                        <ComboBox fx:id="updateBox" layoutX="32.0" layoutY="117.0" prefHeight="27.0" prefWidth="509.0" />
-                        <TextField fx:id="pnr" disable="true" layoutX="273.0" layoutY="182.0" />
-                        <TextField fx:id="vname" disable="true" layoutX="273.0" layoutY="247.0" />
-                        <TextField fx:id="nname" disable="true" layoutX="273.0" layoutY="311.0" prefHeight="28.0" prefWidth="169.0" />
-                        <Button fx:id="updateB" disable="true" layoutX="279.0" layoutY="403.0" mnemonicParsing="false" onAction="#update" text="update" />
-                        <Button fx:id="deleteB" disable="true" layoutX="381.0" layoutY="403.0" mnemonicParsing="false" onAction="#delete" text="delete" />
-                        <Label layoutX="125.0" layoutY="316.0" text="Nachname" />
-                        <Label layoutX="148.0" layoutY="252.0" text="Vorname" />
-                        <Label layoutX="155.0" layoutY="187.0" text="Nummer" />
+                        <ComboBox fx:id="updateBox" layoutX="32.0" layoutY="117.0" prefHeight="30.0" prefWidth="511.0" />
+                        <TextField fx:id="pnr" disable="true" layoutX="274.0" layoutY="170.0" />
+                        <TextField fx:id="pos" disable="true" layoutX="274.0" layoutY="207.0" />
+                        <TextField fx:id="cash" disable="true" layoutX="273.0" layoutY="246.0" prefHeight="28.0" prefWidth="169.0" />
+                        <Button fx:id="updateB" disable="true" layoutX="303.0" layoutY="429.0" mnemonicParsing="false" onAction="#update" text="update" />
+                        <Label layoutX="156.0" layoutY="252.0" text="gehalt" />
+                        <Label layoutX="149.0" layoutY="212.0" text="posotion" />
+                        <Label layoutX="156.0" layoutY="175.0" text="persnr" />
                         <Button fx:id="auswahlB" disable="true" layoutX="577.0" layoutY="117.0" mnemonicParsing="false" onAction="#auswahl" text="auswahl" />
                         <Button fx:id="dbeinfugen" layoutX="32.0" layoutY="65.0" mnemonicParsing="false" onAction="#anzeige" text="DB laden" />
-                        <Text layoutX="256.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="UPDATE/DELETE" wrappingWidth="200.67694091796875">
+                        <Text layoutX="256.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="UPDATE Spieler" wrappingWidth="200.67694091796875">
                            <font>
                               <Font size="24.0" />
                            </font>
                         </Text>
-                        <Label fx:id="status2" layoutX="273.0" layoutY="356.0" text="Bitte update oder delete wählen." />
+                        <Label fx:id="status2" layoutX="134.0" layoutY="392.0" text="Bitte Daten zum Ändern eingeben und dann auf &quot;update&quot; klicken!" />
+                        <Label layoutX="167.0" layoutY="290.0" text="von" />
+                        <Label layoutX="167.0" layoutY="331.0" text="bis" />
+                        <TextField fx:id="von" disable="true" layoutX="276.0" layoutY="285.0" />
+                        <TextField fx:id="bis" disable="true" layoutX="273.0" layoutY="326.0" />
                      </children>
                   </AnchorPane>
               </items>
             </SplitPane>
          </content>
       </Tab>
-      <Tab fx:id="insertPane" disable="true" text="Insert">
+      <Tab fx:id="insertPane" disable="true" text="Insert Spiele">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
@@ -98,7 +101,7 @@
                   <Label layoutX="189.0" layoutY="139.0" text="Nummer" />
                   <Label layoutX="180.0" layoutY="212.0" text="Vorname" />
                   <Label layoutX="161.0" layoutY="290.0" text="Nachname" />
-                  <Text layoutX="297.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="INSERT">
+                  <Text layoutX="260.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="INSERT Spiele">
                      <font>
                         <Font size="24.0" />
                      </font>

@@ -54,7 +54,7 @@ public class Controller implements Initializable {
 	private Button start, connectButton, auswahl, updateB, auswahlB, anzeigeB, dbeinfugen, deleteB, insertB, delete;
 
 	@FXML
-	private TextField ip, dbName, user, passwort, insnname, insvname, insNr, pnr, vname, nname;
+	private TextField ip, dbName, user, passwort, insnname, insvname, insNr, pnr, cash, pos, von, bis, geg, manns, erg;
 
 	@FXML
 	private Label status, selectText, hinzText, status2;
@@ -133,7 +133,7 @@ public class Controller implements Initializable {
 
 				con.setAutoCommit(false);
 
-				st.executeUpdate("INSERT INTO Person VALUES (" + num + ", '" + vnam + "', '" + nnam + "')");
+				st.executeUpdate("INSERT INTO Spiel VALUES (" + num + ", '" + vnam + "', '" + nnam + "')");
 				hinzText.setText("erfolgreich hinzugefügt!");
 
 				con.commit();
@@ -173,13 +173,15 @@ public class Controller implements Initializable {
 			// Abfrage vorbereiten und ausführen
 			Statement st = con.createStatement();
 			con.setAutoCommit(false);
-			ResultSet rs = st.executeQuery("select * from Person");
+			ResultSet rs = st.executeQuery("select * from Spieler");
 			anzeigeB.setDisable(true);
 			dbeinfugen.setDisable(true);
 			pnr.setDisable(false);
-			vname.setDisable(false);
-			nname.setDisable(false);
+			pos.setDisable(false);
+			cash.setDisable(false);
 			auswahlB.setDisable(false);
+			von.setDisable(false);
+			bis.setDisable(false);
 
 			for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
 				final int j = i;
@@ -240,8 +242,8 @@ public class Controller implements Initializable {
 			// Abfrage vorbereiten und ausführen
 			Statement st = con.createStatement();
 			con.setAutoCommit(false);
-			st.executeUpdate("UPDATE person SET vorname=\'" + vname.getText() + "\', nachname=\'" + nname.getText()
-					+ "\', nummer=\'" + pnr.getText() + "\' WHERE nummer=\'" + updatear[0] + "\'");
+			st.executeUpdate("UPDATE Spieler SET position=\'" + pos.getText()
+					+ "\', gehalt=\'" + cash.getText() + "\', von=\'" + von.getText() +"\', bis=\'" + bis.getText() + "\' WHERE persnr=\'" + updatear[0] + "\'");
 			
 		con.commit();
 		} catch (SQLException se) {
@@ -259,7 +261,7 @@ public class Controller implements Initializable {
 	 * 
 	 * @param event
 	 * @throws SQLException 
-	 */
+	
 	@FXML
 	public void delete(ActionEvent event) throws SQLException {
 
@@ -280,6 +282,7 @@ public class Controller implements Initializable {
 		}
 
 	}
+	 */
 
 	/**
 	 * Methode für die Auswahl der Datensätze bei Update und Insert ComboBox
@@ -296,8 +299,11 @@ public class Controller implements Initializable {
 		updateB.setDisable(false);
 		deleteB.setDisable(false);
 		pnr.setText(updatear[0]);
-		vname.setText(updatear[1]);
-		nname.setText(updatear[2]);
+		pos.setText(updatear[1]);
+		cash.setText(updatear[2]);
+		von.setText(updatear[3]);
+		bis.setText(updatear[4]);
+	
 	}
 
 	/**
