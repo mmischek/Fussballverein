@@ -116,7 +116,7 @@ public class Controller implements Initializable {
 
 	/**
 	 * Methode für Insert Erstellt ein INSERT Statement und ließt Eingaben von
-	 * User ein Ich habe die Tabelle "Spiele" von der Fussballverein DB verwendet
+	 * User ein Ich habe die Tabelle "Person" von der SchokoDB verwendet
 	 * 
 	 * @param event
 	 * @throws SQLException
@@ -124,17 +124,16 @@ public class Controller implements Initializable {
 	public void insert(ActionEvent event) throws SQLException {
 		if (insNr.getText().matches("^-?\\d+$")) {
 
-			//int num = Integer.parseInt(insNr.getText());
-			String ergebnis = erg.getText();
-			String gegner = geg.getText();
-			String mannschaft = manns.getText();
+			int num = Integer.parseInt(insNr.getText());
+			String vnam = insvname.getText();
+			String nnam = insnname.getText();
 			try {
 
 				Statement st = con.createStatement();
 
 				con.setAutoCommit(false);
 
-				st.executeUpdate("INSERT INTO Spiel VALUES (" + gegner + ", '" + mannschaft + "', '" + ergebnis + "')");
+				st.executeUpdate("INSERT INTO Spiel VALUES (" + num + ", '" + vnam + "', '" + nnam + "')");
 				hinzText.setText("erfolgreich hinzugefügt!");
 
 				con.commit();

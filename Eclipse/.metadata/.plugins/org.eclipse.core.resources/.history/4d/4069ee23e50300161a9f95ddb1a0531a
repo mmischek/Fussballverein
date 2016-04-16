@@ -116,7 +116,7 @@ public class Controller implements Initializable {
 
 	/**
 	 * Methode für Insert Erstellt ein INSERT Statement und ließt Eingaben von
-	 * User ein Ich habe die Tabelle "Spiele" von der Fussballverein DB verwendet
+	 * User ein Ich habe die Tabelle "Person" von der SchokoDB verwendet
 	 * 
 	 * @param event
 	 * @throws SQLException
@@ -134,7 +134,7 @@ public class Controller implements Initializable {
 
 				con.setAutoCommit(false);
 
-				st.executeUpdate("INSERT INTO Spiel VALUES (" + gegner + ", '" + mannschaft + "', '" + ergebnis + "')");
+				st.executeUpdate("INSERT INTO Spiel VALUES (" + gegner + ", '" + mannschaft + "', '" + ergnebis + "')");
 				hinzText.setText("erfolgreich hinzugefügt!");
 
 				con.commit();
