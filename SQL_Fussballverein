@@ -1,0 +1,5 @@
+CREATE USER fussballuser WITH LOGIN PASSWORD 'Fusspass';
+CREATE DATABASE fussballverein OWNER fussballuser;
+GRANT ALL PRIVILEGES ON DATABASE fussballverein TO fussballuser;
+
+psql -h localhost -U fussballuser -W -d fussballverein
