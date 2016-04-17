@@ -363,7 +363,7 @@ public class Controller implements Initializable {
 					+ "\', bezeichnung=\'" + bezField.getText() + "\', gegner=\'" + gegField.getText() +"\', ergebnis=\'" + ergField.getValue() + "\' WHERE datum=\'" + updatear[0] + "\'");
 			
 
-			
+			statusSpiel.setText("Der Datenatz wurde erfolgreich geändert.");
 		con.commit();
 		} catch (SQLException se) {
 			con.rollback();

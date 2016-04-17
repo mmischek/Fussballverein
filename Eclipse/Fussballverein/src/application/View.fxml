@@ -34,7 +34,7 @@
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="256.0" prefWidth="361.0">
                <children>
-                  <TextField fx:id="ip" layoutX="435.0" layoutY="138.0" text="172.17.0.160" />
+                  <TextField fx:id="ip" layoutX="435.0" layoutY="138.0" text="172.16.231.133" />
                   <TextField fx:id="dbName" layoutX="435.0" layoutY="178.0" text="fussballverein" />
                   <TextField fx:id="user" layoutX="435.0" layoutY="215.0" text="fussballuser" />
                   <PasswordField fx:id="passwort" layoutX="435.0" layoutY="257.0" text="Fusspass" />
@@ -65,15 +65,15 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <Button layoutX="34.0" layoutY="100.0" mnemonicParsing="false" onAction="#aktualisierenTwo" text="Anzeige löschen" />
-                  <Button fx:id="dbanzeigen" layoutX="572.0" layoutY="100.0" mnemonicParsing="false" onAction="#anzeigeSpiel" prefHeight="27.0" prefWidth="155.0" text="DB anzeigen" />
+                  <Button layoutX="14.0" layoutY="112.0" mnemonicParsing="false" onAction="#aktualisierenTwo" text="Anzeige löschen" />
+                  <Button fx:id="dbanzeigen" layoutX="597.0" layoutY="112.0" mnemonicParsing="false" onAction="#anzeigeSpiel" prefHeight="27.0" prefWidth="155.0" text="DB anzeigen" />
                   <TableView fx:id="anzeigeTwo" layoutX="14.0" layoutY="171.0" prefHeight="390.0" prefWidth="731.0" />
                   <ImageView fitHeight="133.0" fitWidth="521.0" layoutX="110.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="http://mmischek.at/images-fussballverein/header.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="spiellabel" layoutX="116.0" layoutY="138.0" prefHeight="17.0" prefWidth="533.0" text="Um die Tabelle &quot;Spiel&quot; der Fussball DB anzuzeigen klicken Sie auf &quot;DB anzeigen&quot;." />
+                  <Label fx:id="spiellabel" layoutX="116.0" layoutY="146.0" prefHeight="17.0" prefWidth="533.0" text="Um die Tabelle &quot;Spiel&quot; der Fussball DB anzuzeigen klicken Sie auf &quot;DB anzeigen&quot;." />
                </children>
             </AnchorPane>
         </content>
@@ -83,8 +83,8 @@
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
                   <TableView fx:id="anzeige" layoutX="16.0" layoutY="165.0" prefHeight="398.0" prefWidth="729.0" />
-                  <Button fx:id="anzeigeB" layoutX="613.0" layoutY="89.0" mnemonicParsing="false" onAction="#anzeige" prefHeight="27.0" prefWidth="128.0" text="DB anzeigen" />
-                  <Button layoutX="22.0" layoutY="89.0" mnemonicParsing="false" onAction="#aktualisieren" text="Anzeige löschen" />
+                  <Button fx:id="anzeigeB" layoutX="623.0" layoutY="103.0" mnemonicParsing="false" onAction="#anzeige" prefHeight="27.0" prefWidth="128.0" text="DB anzeigen" />
+                  <Button layoutX="14.0" layoutY="103.0" mnemonicParsing="false" onAction="#aktualisieren" text="Anzeige löschen" />
                   <Label fx:id="spielerlabel" layoutX="106.0" layoutY="127.0" prefHeight="28.0" prefWidth="511.0" text="Um die Tabelle &quot;Spieler&quot; der Fussball DB anzuzeigen klicken Sie auf &quot;DB anzeigen&quot;." />
                   <ImageView fitHeight="154.0" fitWidth="462.0" layoutX="144.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
                      <image>
