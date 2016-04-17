@@ -457,7 +457,7 @@ public class Controller implements Initializable {
 	 */
 	@FXML
 	public void aktualisierenTwo(ActionEvent event) throws SQLException {
-		dbanzeigen.setDisable(false);
+//		anzeigeB.setDisable(false);
 		dbeinfuegen.setDisable(false);
 		anzeigeTwo.getColumns().clear();
 		data.clear();

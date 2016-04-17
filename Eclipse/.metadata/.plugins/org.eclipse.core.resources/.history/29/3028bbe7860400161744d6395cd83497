@@ -51,22 +51,22 @@ public class Controller implements Initializable {
 	private TextField eingabe, updateTextfield;
 
 	@FXML
-	private Button start, connectButton, auswahl, updateB, auswahlB, anzeigeB, dbeinfugen, deleteB, insertB, delete, dbanzeigen, dbeinfuegen;
+	private Button start, connectButton, auswahl, updateB, auswahlB, anzeigeB, dbeinfugen, deleteB, insertB, delete;
 
 	@FXML
-	private TextField ip, dbName, user, passwort, insnname, insvname, insNr, pnr, cash, pos, von, bis, geg, manns, erg, dateField, bezField, ergField, gegField;
+	private TextField ip, dbName, user, passwort, insnname, insvname, insNr, pnr, cash, pos, von, bis, geg, manns, erg;
 
 	@FXML
 	private Label status, selectText, hinzText, status2;
 
 	@FXML
-	private Tab abfragePane, updatePane, anzeigePane, insertPane, updateSpielT, anzeigeSpielT;
+	private Tab abfragePane, updatePane, anzeigePane, insertPane;
 
 	private PGSimpleDataSource ds;
 
 	@SuppressWarnings("rawtypes")
 	@FXML
-	private ComboBox updateBox, updateBoxTwo;
+	private ComboBox updateBox, updateBox2;
 
 	private String[] updatear;
 
@@ -99,8 +99,6 @@ public class Controller implements Initializable {
 			updatePane.setDisable(false);
 			anzeigePane.setDisable(false);
 			insertPane.setDisable(false);
-			updateSpielT.setDisable(false);
-			anzeigeSpielT.setDisable(false);
 
 			// Exception handling
 		} catch (PSQLException e) {
@@ -171,7 +169,7 @@ public class Controller implements Initializable {
 	public void anzeige(ActionEvent event) throws SQLException {
 
 		try {
-			aktualisierenTwo(event);
+
 			con = ds.getConnection();
 			// Abfrage vorbereiten und ausführen
 			Statement st = con.createStatement();
@@ -247,13 +245,14 @@ public class Controller implements Initializable {
 			Statement st = con.createStatement();
 			con.setAutoCommit(false);
 			ResultSet res = st.executeQuery("select * from Spiel");
-			dbanzeigen.setDisable(true);
-			dbeinfuegen.setDisable(true);
-			dateField.setDisable(false);
-			bezField.setDisable(false);
-			gegField.setDisable(false);
-			ergField.setDisable(false);
-			
+//			anzeigeB.setDisable(true);
+//			dbeinfugen.setDisable(true);
+//			pnr.setDisable(false);
+//			pos.setDisable(false);
+//			cash.setDisable(false);
+//			auswahlB.setDisable(false);
+//			von.setDisable(false);
+//			bis.setDisable(false);
 
 			for (int i = 0; i < res.getMetaData().getColumnCount(); i++) {
 				final int j = i;
@@ -280,7 +279,7 @@ public class Controller implements Initializable {
 
 				data.add(row);
 			}
-			updateBoxTwo.setItems(data);
+			//updateBox.setItems(data);
 			anzeigeTwo.setItems(data);
 			con.commit();
 
@@ -326,37 +325,6 @@ public class Controller implements Initializable {
 
 	}
 
-	
-	
-	/**
-	 * Methode für das Statement "Update" Ändert Datensätze
-	 * 
-	 * @param event
-	 * @throws SQLException 
-	 */
-	@FXML
-	public void updateSpiel(ActionEvent event) throws SQLException {
-
-		try {
-			//status2.setText("Datensatz wurde erfolgreich geaendert!");
-			aktualisierenTwo(event);
-			Connection con = ds.getConnection();
-			// Abfrage vorbereiten und ausführen
-			Statement st = con.createStatement();
-			con.setAutoCommit(false);
-			st.executeUpdate("UPDATE Spiel SET datum=\'" + dateField.getText()
-					+ "\', bezeichnung=\'" + bezField.getText() + "\', gegner=\'" + gegField.getText() +"\', ergebnis=\'" + ergField.getText() + "\' WHERE datum=\'" + updatear[0] + "\'");
-			
-		con.commit();
-		} catch (SQLException se) {
-			con.rollback();
-			System.err.println("Update - Error");
-			se.printStackTrace(System.err);
-		}
-
-	}
-
-	
 	/**
 	 * Methode für das Statement "Delete" Löscht Datensätze aus der Tabelle
 	 * Damit delete eines datensatzes in der Personen Tabelle musste ich zuerst
@@ -400,35 +368,12 @@ public class Controller implements Initializable {
 		input = input.substring(1, input.length() - 1);
 		updatear = input.split(", ");
 		updateB.setDisable(false);
-	
+		deleteB.setDisable(false);
 		pnr.setText(updatear[0]);
 		pos.setText(updatear[1]);
 		cash.setText(updatear[2]);
 		von.setText(updatear[3]);
 		bis.setText(updatear[4]);
-	
-	}
-	
-	
-	/**
-	 * Methode für die Auswahl der Datensätze bei Update und Insert ComboBox
-	 * gibt Daten TextField
-	 * 
-	 * @param event
-	 */
-	@FXML
-	public void auswahlTwo(ActionEvent event) {
-
-		String input = updateBoxTwo.getValue() + "";
-		input = input.substring(1, input.length() - 1);
-		updatear = input.split(", ");
-//		updateB.setDisable(false);
-//		deleteB.setDisable(false);
-		dateField.setText(updatear[0]);
-		bezField.setText(updatear[1]);
-		gegField.setText(updatear[2]);
-		ergField.setText(updatear[3]);
-		
 	
 	}
 
@@ -443,23 +388,6 @@ public class Controller implements Initializable {
 		anzeigeB.setDisable(false);
 		dbeinfugen.setDisable(false);
 		anzeige.getColumns().clear();
-		data.clear();
-		data = FXCollections.observableArrayList();
-		connect(null);
-
-	}
-	
-	/**
-	 * Löscht Anzeige und Tabelle
-	 * 
-	 * @param event
-	 * @throws SQLException
-	 */
-	@FXML
-	public void aktualisierenTwo(ActionEvent event) throws SQLException {
-		dbanzeigen.setDisable(false);
-		dbeinfuegen.setDisable(false);
-		anzeigeTwo.getColumns().clear();
 		data.clear();
 		data = FXCollections.observableArrayList();
 		connect(null);

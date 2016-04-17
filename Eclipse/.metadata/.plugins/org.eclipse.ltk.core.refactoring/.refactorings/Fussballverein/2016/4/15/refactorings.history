@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename local variable &apos;rs&apos; in &apos;application.Controller.anzeigeSpiel(...)&apos; to &apos;res&apos;&#x0A;- Original project: &apos;Fussballverein&apos;&#x0A;- Original element: &apos;application.Controller.anzeigeSpiel(ActionEvent).rs&apos;&#x0A;- Renamed element: &apos;rs&apos;&#x0A;- Update references to refactored element" description="Rename local variable &apos;rs&apos;" id="org.eclipse.jdt.ui.rename.local.variable" input="/src&lt;application{Controller.java[Controller~anzeigeSpiel~QActionEvent;@rs!6383!6436!6393!6394!QResultSet;!0!false" name="res" references="true" stamp="1460888605640" version="1.0"/>
+</session>
