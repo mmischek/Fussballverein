@@ -55,13 +55,13 @@ public class Controller implements Initializable {
 	private TextField eingabe, updateTextfield, dateInsert, timeInsert, ergInsert, mannsInsert, gegInsert;
 
 	@FXML
-	private Button  connectButton, auswahl, updateB, auswahlB, anzeigeB, dbeinfugen, deleteB, insertB, delete, dbanzeigen, dbeinfuegen, auswahlBspiel, updateBspiel;
+	private Button  connectButton, auswahl, updateB, auswahlB, anzeigeB, dbeinfugen, deleteB, insertB, delete, dbanzeigen, dbeinfuegen;
 
 	@FXML
 	private TextField ip, dbName, user, passwort, insnname, insvname, insNr, pnr, cash, pos, von, bis, geg, manns, erg, dateField, bezField, gegField;
 
 	@FXML
-	private Label status, hinzText, status2, spiellabel, spielerlabel;
+	private Label status, hinzText, status2, spiellabel, spielerlabel, load1;
 
 	@FXML
 	private Tab updatePane, anzeigePane, insertPane, updateSpielT, anzeigeSpielT;
@@ -133,8 +133,9 @@ public class Controller implements Initializable {
 	 * @throws SQLException
 	 */
 	public void insert(ActionEvent event) throws SQLException {
-	 if (insNr.getText().matches("^-?\\d+$")) {
+		// if (insNr.getText().matches("^-?\\d+$")) {
 
+			//int num = Integer.parseInt(insNr.getText());
 			String dateins = dateInsert.getText();
 	
 			String gegins = gegInsert.getText();
@@ -171,11 +172,11 @@ public class Controller implements Initializable {
 
 			}
 
-		}
-		else {
-			hinzText.setText("Bitte für die Nummer nur Zahlen eingeben!");
-
-		}
+	//	}
+//		else {
+//			hinzText.setText("Bitte für die Nummer nur Zahlen eingeben!");
+//
+//		}
 	}
 
 	/**
@@ -196,7 +197,12 @@ public class Controller implements Initializable {
 			ResultSet rs = st.executeQuery("select * from Spieler");
 			anzeigeB.setDisable(true);
 			dbeinfugen.setDisable(true);
-			
+			pnr.setDisable(false);
+			pos.setDisable(false);
+			cash.setDisable(false);
+			auswahlB.setDisable(false);
+			von.setDisable(false);
+			bis.setDisable(false);
 
 			for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
 				final int j = i;
@@ -251,7 +257,7 @@ public class Controller implements Initializable {
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void anzeigeSpiel(ActionEvent event) throws SQLException {
-		
+		load1.setText("load...");
 		try {
 			
 			data = FXCollections.observableArrayList();
@@ -262,7 +268,10 @@ public class Controller implements Initializable {
 			ResultSet res = st.executeQuery("select * from Spiel");
 			dbanzeigen.setDisable(true);
 			dbeinfuegen.setDisable(true);
-			auswahlBspiel.setDisable(false);
+			dateField.setDisable(false);
+			bezField.setDisable(false);
+			gegField.setDisable(false);
+			ergField.setDisable(false);
 			
 
 			for (int i = 0; i < res.getMetaData().getColumnCount(); i++) {
@@ -293,7 +302,7 @@ public class Controller implements Initializable {
 			updateBoxTwo.setItems(data);
 			anzeigeTwo.setItems(data);
 			con.commit();
-			
+			load1.setText("eingefügt!");
 
 		} catch (PSQLException se) {
 			con.rollback();
@@ -390,12 +399,6 @@ public class Controller implements Initializable {
 		cash.setText(updatear[2]);
 		von.setText(updatear[3]);
 		bis.setText(updatear[4]);
-		pnr.setDisable(false);
-		pos.setDisable(false);
-		cash.setDisable(false);
-		auswahlB.setDisable(false);
-		von.setDisable(false);
-		bis.setDisable(false);
 	
 	}
 	
@@ -413,17 +416,12 @@ public class Controller implements Initializable {
 		String input = updateBoxTwo.getValue() + "";
 		input = input.substring(1, input.length() - 1);
 		updatear = input.split(", ");
-
+//		updateB.setDisable(false);
+//		deleteB.setDisable(false);
 		dateField.setText(updatear[0]);
 		bezField.setText(updatear[1]);
 		gegField.setText(updatear[2]);
 		ergField.setValue(updatear[3]);
-		ergField.setDisable(false);
-		dateField.setDisable(false);
-		bezField.setDisable(false);
-		gegField.setDisable(false);
-		ergField.setDisable(false);
-		updateBspiel.setDisable(false);
 		
 	
 	}

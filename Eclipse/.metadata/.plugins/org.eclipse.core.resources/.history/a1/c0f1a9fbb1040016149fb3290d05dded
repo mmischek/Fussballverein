@@ -55,13 +55,13 @@ public class Controller implements Initializable {
 	private TextField eingabe, updateTextfield, dateInsert, timeInsert, ergInsert, mannsInsert, gegInsert;
 
 	@FXML
-	private Button  connectButton, auswahl, updateB, auswahlB, anzeigeB, dbeinfugen, deleteB, insertB, delete, dbanzeigen, dbeinfuegen, auswahlBspiel, updateBspiel;
+	private Button  connectButton, auswahl, updateB, auswahlB, anzeigeB, dbeinfugen, deleteB, insertB, delete, dbanzeigen, dbeinfuegen, auswahlBspiel;
 
 	@FXML
 	private TextField ip, dbName, user, passwort, insnname, insvname, insNr, pnr, cash, pos, von, bis, geg, manns, erg, dateField, bezField, gegField;
 
 	@FXML
-	private Label status, hinzText, status2, spiellabel, spielerlabel;
+	private Label status, hinzText, status2, spiellabel, spielerlabel, load1;
 
 	@FXML
 	private Tab updatePane, anzeigePane, insertPane, updateSpielT, anzeigeSpielT;
@@ -251,7 +251,7 @@ public class Controller implements Initializable {
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void anzeigeSpiel(ActionEvent event) throws SQLException {
-		
+		load1.setText("load...");
 		try {
 			
 			data = FXCollections.observableArrayList();
@@ -293,7 +293,7 @@ public class Controller implements Initializable {
 			updateBoxTwo.setItems(data);
 			anzeigeTwo.setItems(data);
 			con.commit();
-			
+			load1.setText("eingefügt!");
 
 		} catch (PSQLException se) {
 			con.rollback();
@@ -423,7 +423,6 @@ public class Controller implements Initializable {
 		bezField.setDisable(false);
 		gegField.setDisable(false);
 		ergField.setDisable(false);
-		updateBspiel.setDisable(false);
 		
 	
 	}
