@@ -111,7 +111,7 @@ public class Controller implements Initializable {
 			   
 			   ergField.setItems(stand);
 			   ergInsert.setItems(stand);
-			   status.setText("Erfolgreich Verbunden!");
+			   status.setText("Verbunden!");
 
 			// Exception handling
 		} catch (PSQLException e) {

@@ -61,7 +61,7 @@ public class Controller implements Initializable {
 	private TextField ip, dbName, user, passwort, insnname, insvname, insNr, pnr, cash, pos, von, bis, geg, manns, erg, dateField, bezField, gegField;
 
 	@FXML
-	private Label status, hinzText, status2, spiellabel, spielerlabel, statusSpiel;
+	private Label status, hinzText, status2, spiellabel, spielerlabel;
 
 	@FXML
 	private Tab updatePane, anzeigePane, insertPane, updateSpielT, anzeigeSpielT;
@@ -99,7 +99,7 @@ public class Controller implements Initializable {
 
 		{
 			this.con = ds.getConnection(); // Verbinden
-			
+			status.setText("Verbunden!");
 			
 			updatePane.setDisable(false);
 			anzeigePane.setDisable(false);
@@ -111,7 +111,6 @@ public class Controller implements Initializable {
 			   
 			   ergField.setItems(stand);
 			   ergInsert.setItems(stand);
-			   status.setText("Erfolgreich Verbunden!");
 
 			// Exception handling
 		} catch (PSQLException e) {
@@ -191,7 +190,6 @@ public class Controller implements Initializable {
 			ResultSet rs = st.executeQuery("select * from Spieler");
 			anzeigeB.setDisable(true);
 			dbeinfugen.setDisable(true);
-			auswahlB.setDisable(false);
 			
 
 			for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
@@ -226,12 +224,12 @@ public class Controller implements Initializable {
 		} catch (PSQLException se) {
 			con.rollback();
 			System.err.println("Error");
-			spielerlabel.setText("Error! Bitte kontaktieren Sie den Admin.");
+			spielerlabel.setText("Error. Bitte korrigieren Sie ihre Eingabe.");
 
 		} catch (Exception se) {
 			con.rollback();
 			System.err.println("Error");
-			spielerlabel.setText("Error! Bitte kontaktieren Sie den Admin.");
+			spielerlabel.setText("Error. Bitte korrigieren Sie ihre Eingabe.");
 
 		}
 
@@ -293,13 +291,13 @@ public class Controller implements Initializable {
 
 		} catch (PSQLException se) {
 			con.rollback();
-			System.err.println("Error PSQL");
-			spiellabel.setText("Error! Bitte kontaktieren Sie den Admin.");
+			System.err.println("Error");
+			spiellabel.setText("Error. Bitte korrigieren Sie ihre Eingabe.");
 
 		} catch (Exception se) {
 			con.rollback();
-			System.err.println("Error Exception");
-			spiellabel.setText("Error! Bitte kontaktieren Sie den Admin.");
+			System.err.println("Error");
+			spiellabel.setText("Error. Bitte korrigieren Sie ihre Eingabe.");
 
 		}
 
@@ -330,14 +328,7 @@ public class Controller implements Initializable {
 		} catch (SQLException se) {
 			con.rollback();
 			System.err.println("Update - Error");
-			status2.setText("Error! Bitte korrigieren Sie Ihre Eingabe.");
-
-			
-		} catch (Exception se) {
-			con.rollback();
-			System.err.println("Error Exception");
-			status2.setText("Error! Bitte korrigieren Sie Ihre Eingabe.");
-
+			se.printStackTrace(System.err);
 		}
 
 	}
@@ -369,12 +360,7 @@ public class Controller implements Initializable {
 		} catch (SQLException se) {
 			con.rollback();
 			System.err.println("Update - Error");
-			statusSpiel.setText("Error! Bitte korrigieren Sie Ihre Eingabe.");
-		}
-		catch (Exception se) {
-			con.rollback();
-			System.err.println("Update - Error");
-			statusSpiel.setText("Error! Bitte korrigieren Sie Ihre Eingabe.");
+			se.printStackTrace(System.err);
 		}
 
 	}
@@ -389,7 +375,6 @@ public class Controller implements Initializable {
 	 */
 	@FXML
 	public void auswahl(ActionEvent event) {
-		try{
 
 		String input = updateBox.getValue() + "";
 		input = input.substring(1, input.length() - 1);
@@ -407,12 +392,6 @@ public class Controller implements Initializable {
 		auswahlB.setDisable(false);
 		von.setDisable(false);
 		bis.setDisable(false);
-		}
-		catch (Exception se){
-			System.err.println("Update - Error");
-			status2.setText("Error! Bitte wählen Sie zuerst einen Spieler aus.");
-			
-		}
 	
 	}
 	
@@ -426,7 +405,6 @@ public class Controller implements Initializable {
 	@SuppressWarnings("unchecked")
 	@FXML
 	public void auswahlTwo(ActionEvent event) {
-		try{
 
 		String input = updateBoxTwo.getValue() + "";
 		input = input.substring(1, input.length() - 1);
@@ -442,12 +420,7 @@ public class Controller implements Initializable {
 		gegField.setDisable(false);
 		ergField.setDisable(false);
 		updateBspiel.setDisable(false);
-	}
-	catch (Exception se){
-		System.err.println("Update - Error");
-		statusSpiel.setText("Error! Bitte wählen Sie zuerst ein Spiel aus.");
 		
-	}
 	
 	}
 
