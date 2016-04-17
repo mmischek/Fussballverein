@@ -54,7 +54,7 @@
                      </font></Label>
                   <ImageView fitHeight="295.0" fitWidth="340.0" layoutX="40.0" layoutY="252.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="http://mmischek.at/images-fussballverein//football1.png" />
+                        <Image url="@/Fussballverein/Images/football.png" />
                      </image>
                   </ImageView>
                </children>
@@ -70,7 +70,7 @@
                   <TableView fx:id="anzeigeTwo" layoutX="14.0" layoutY="171.0" prefHeight="390.0" prefWidth="731.0" />
                   <ImageView fitHeight="133.0" fitWidth="521.0" layoutX="110.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="http://mmischek.at/images-fussballverein/header.png" />
+                        <Image url="header.png" />
                      </image>
                   </ImageView>
                   <Label fx:id="spiellabel" layoutX="116.0" layoutY="138.0" prefHeight="17.0" prefWidth="533.0" text="Um die Tabelle &quot;Spiel&quot; der Fussball DB anzuzeigen klicken Sie auf &quot;DB anzeigen&quot;." />
@@ -88,7 +88,7 @@
                   <Label fx:id="spielerlabel" layoutX="106.0" layoutY="127.0" prefHeight="28.0" prefWidth="511.0" text="Um die Tabelle &quot;Spieler&quot; der Fussball DB anzuzeigen klicken Sie auf &quot;DB anzeigen&quot;." />
                   <ImageView fitHeight="154.0" fitWidth="462.0" layoutX="144.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="http://mmischek.at/images-fussballverein/header1.png" />
+                        <Image url="header1.png" />
                      </image>
                   </ImageView>
                </children>
@@ -119,7 +119,7 @@
                   <Label layoutX="561.0" layoutY="259.0" text="(nicht veränderbar)" />
                   <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="359.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="http://mmischek.at/images-fussballverein/update.png" />
+                        <Image url="update.png" />
                      </image>
                   </ImageView>
                   <Label fx:id="statusSpiel" layoutX="226.0" layoutY="455.0" text="Bitte Daten zum Ändern eingeben und dann auf &quot;update&quot; klicken!" />
@@ -155,7 +155,7 @@
                         </Text>
                         <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="371.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="http://mmischek.at/images-fussballverein/update.png" />
+                              <Image url="@images/update.png" />
                            </image>
                         </ImageView>
                      </children>
@@ -184,7 +184,7 @@
                   <Label layoutX="425.0" layoutY="126.0" text="Datum &amp; Zeit:" />
                   <ImageView fitHeight="336.0" fitWidth="321.0" layoutX="387.0" layoutY="189.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="http://mmischek.at/images-fussballverein/football.png" />
+                        <Image url="football.png" />
                      </image>
                   </ImageView>
                   <ComboBox fx:id="ergInsert" layoutX="197.0" layoutY="238.0" prefHeight="27.0" prefWidth="168.0" promptText="Ergebnis wählen" />
