@@ -20,6 +20,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
@@ -40,33 +42,35 @@ public class Controller implements Initializable {
 
 	}
 
+	
+	
 	@SuppressWarnings("rawtypes")
 	private ObservableList<ObservableList> data;
 
 	@SuppressWarnings("rawtypes")
 	@FXML
-	private TableView ausgabe, anzeige, anzeigeTwo;
+	private TableView anzeige, anzeigeTwo;
 
 	@FXML
-	private TextField eingabe, updateTextfield;
+	private TextField eingabe, updateTextfield, dateInsert, timeInsert, ergInsert, mannsInsert, gegInsert;
 
 	@FXML
-	private Button start, connectButton, auswahl, updateB, auswahlB, anzeigeB, dbeinfugen, deleteB, insertB, delete, dbanzeigen, dbeinfuegen;
+	private Button  connectButton, auswahl, updateB, auswahlB, anzeigeB, dbeinfugen, deleteB, insertB, delete, dbanzeigen, dbeinfuegen;
 
 	@FXML
-	private TextField ip, dbName, user, passwort, insnname, insvname, insNr, pnr, cash, pos, von, bis, geg, manns, erg, dateField, bezField, ergField, gegField;
+	private TextField ip, dbName, user, passwort, insnname, insvname, insNr, pnr, cash, pos, von, bis, geg, manns, erg, dateField, bezField, gegField;
 
 	@FXML
-	private Label status, selectText, hinzText, status2;
+	private Label status, hinzText, status2, spiellabel, spielerlabel, load1;
 
 	@FXML
-	private Tab abfragePane, updatePane, anzeigePane, insertPane, updateSpielT, anzeigeSpielT;
+	private Tab updatePane, anzeigePane, insertPane, updateSpielT, anzeigeSpielT;
 
 	private PGSimpleDataSource ds;
 
 	@SuppressWarnings("rawtypes")
 	@FXML
-	private ComboBox updateBox, updateBoxTwo;
+	private ComboBox updateBox, updateBoxTwo, ergField;
 
 	private String[] updatear;
 
@@ -79,6 +83,7 @@ public class Controller implements Initializable {
 	 * @param event
 	 * @throws SQLException
 	 */
+	@SuppressWarnings("unchecked")
 	public void connect(ActionEvent event) throws SQLException {
 
 		data = FXCollections.observableArrayList();
@@ -95,12 +100,16 @@ public class Controller implements Initializable {
 		{
 			this.con = ds.getConnection(); // Verbinden
 			status.setText("Verbunden!");
-			abfragePane.setDisable(false);
+			
 			updatePane.setDisable(false);
 			anzeigePane.setDisable(false);
 			insertPane.setDisable(false);
 			updateSpielT.setDisable(false);
 			anzeigeSpielT.setDisable(false);
+			
+			ObservableList<String> stand = FXCollections.observableArrayList("Sieg", "Unentschieden", "Niederlage");
+			   
+			   ergField.setItems(stand);
 
 			// Exception handling
 		} catch (PSQLException e) {
@@ -124,41 +133,50 @@ public class Controller implements Initializable {
 	 * @throws SQLException
 	 */
 	public void insert(ActionEvent event) throws SQLException {
-		if (insNr.getText().matches("^-?\\d+$")) {
+		// if (insNr.getText().matches("^-?\\d+$")) {
 
 			//int num = Integer.parseInt(insNr.getText());
-			String ergebnis = erg.getText();
-			String gegner = geg.getText();
-			String mannschaft = manns.getText();
+			String dateins = dateInsert.getText();
+	
+			String gegins = gegInsert.getText();
+			String mannsIns = mannsInsert.getText();
+			String ergIns = ergInsert.getText();
+			System.out.println("INSERT INTO Spiel VALUES (" + dateins + ", '" + mannsIns + "', '" + gegins + "', '" + ergIns + "')");
+
 			try {
 
 				Statement st = con.createStatement();
 
 				con.setAutoCommit(false);
 
-				st.executeUpdate("INSERT INTO Spiel VALUES (" + gegner + ", '" + mannschaft + "', '" + ergebnis + "')");
+				st.executeUpdate("INSERT INTO Spiel VALUES ('" + dateins + "', '" + mannsIns + "', '" + gegins + "', '" + ergIns + "')");
+				
 				hinzText.setText("erfolgreich hinzugefügt!");
 
 				con.commit();
 
-			} catch (PSQLException se) {
+			} 
+//				catch (PSQLException se) {
+//				con.rollback();
+//				
+//				System.err.println("Error PSQL");
+//				
+//				hinzText.setText("INSERT ERROR!");
+//
+		//	}
+	catch (NullPointerException se) {
 				con.rollback();
 				System.err.println("Error");
-				selectText.setText("Error. Bitte korrigieren Sie ihre Eingabe.");
-				hinzText.setText("INSERT ERROR!");
-
-			} catch (Exception se) {
-				con.rollback();
-				System.err.println("Error");
-				selectText.setText("Error. Bitte korrigieren Sie ihre Eingabe.");
+				
 				hinzText.setText("INSERT ERROR!");
 
 			}
 
-		} else {
-			hinzText.setText("Bitte für die Nummer nur Zahlen eingeben!");
-
-		}
+	//	}
+//		else {
+//			hinzText.setText("Bitte für die Nummer nur Zahlen eingeben!");
+//
+//		}
 	}
 
 	/**
@@ -214,16 +232,16 @@ public class Controller implements Initializable {
 			updateBox.setItems(data);
 			anzeige.setItems(data);
 			con.commit();
-
+			
 		} catch (PSQLException se) {
 			con.rollback();
 			System.err.println("Error");
-			selectText.setText("Error. Bitte korrigieren Sie ihre Eingabe.");
+			spielerlabel.setText("Error. Bitte korrigieren Sie ihre Eingabe.");
 
 		} catch (Exception se) {
 			con.rollback();
 			System.err.println("Error");
-			selectText.setText("Error. Bitte korrigieren Sie ihre Eingabe.");
+			spielerlabel.setText("Error. Bitte korrigieren Sie ihre Eingabe.");
 
 		}
 
@@ -239,9 +257,10 @@ public class Controller implements Initializable {
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void anzeigeSpiel(ActionEvent event) throws SQLException {
-
+		load1.setText("load...");
 		try {
-
+			
+			data = FXCollections.observableArrayList();
 			con = ds.getConnection();
 			// Abfrage vorbereiten und ausführen
 			Statement st = con.createStatement();
@@ -283,16 +302,17 @@ public class Controller implements Initializable {
 			updateBoxTwo.setItems(data);
 			anzeigeTwo.setItems(data);
 			con.commit();
+			load1.setText("eingefügt!");
 
 		} catch (PSQLException se) {
 			con.rollback();
 			System.err.println("Error");
-			selectText.setText("Error. Bitte korrigieren Sie ihre Eingabe.");
+			spiellabel.setText("Error. Bitte korrigieren Sie ihre Eingabe.");
 
 		} catch (Exception se) {
 			con.rollback();
 			System.err.println("Error");
-			selectText.setText("Error. Bitte korrigieren Sie ihre Eingabe.");
+			spiellabel.setText("Error. Bitte korrigieren Sie ihre Eingabe.");
 
 		}
 
@@ -316,6 +336,7 @@ public class Controller implements Initializable {
 			con.setAutoCommit(false);
 			st.executeUpdate("UPDATE Spieler SET position=\'" + pos.getText()
 					+ "\', gehalt=\'" + cash.getText() + "\', von=\'" + von.getText() +"\', bis=\'" + bis.getText() + "\' WHERE persnr=\'" + updatear[0] + "\'");
+			
 			
 		con.commit();
 		} catch (SQLException se) {
@@ -345,7 +366,8 @@ public class Controller implements Initializable {
 			Statement st = con.createStatement();
 			con.setAutoCommit(false);
 			st.executeUpdate("UPDATE Spiel SET datum=\'" + dateField.getText()
-					+ "\', bezeichnung=\'" + bezField.getText() + "\', gegner=\'" + gegField.getText() +"\', ergebnis=\'" + ergField.getText() + "\' WHERE datum=\'" + updatear[0] + "\'");
+					+ "\', bezeichnung=\'" + bezField.getText() + "\', gegner=\'" + gegField.getText() +"\', ergebnis=\'" + ergField.getValue() + "\' WHERE datum=\'" + updatear[0] + "\'");
+			
 			
 		con.commit();
 		} catch (SQLException se) {
@@ -416,6 +438,7 @@ public class Controller implements Initializable {
 	 * 
 	 * @param event
 	 */
+	@SuppressWarnings("unchecked")
 	@FXML
 	public void auswahlTwo(ActionEvent event) {
 
@@ -427,7 +450,7 @@ public class Controller implements Initializable {
 		dateField.setText(updatear[0]);
 		bezField.setText(updatear[1]);
 		gegField.setText(updatear[2]);
-		ergField.setText(updatear[3]);
+		ergField.setValue(updatear[3]);
 		
 	
 	}
@@ -466,63 +489,4 @@ public class Controller implements Initializable {
 
 	}
 	
-
-	/**
-	 * Methode für Eingabe von Select Befehlen
-	 * 
-	 * @param event
-	 * @throws SQLException 
-	 */
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public void abfrage(ActionEvent event) throws SQLException {
-
-		try {
-			Connection con = ds.getConnection();
-			// Abfrage vorbereiten und ausführen
-			Statement st = con.createStatement();
-			con.setAutoCommit(false);
-			ResultSet rs = st.executeQuery("select " + eingabe.getText());
-
-			for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
-				final int j = i;
-				TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i + 1));
-				col.setCellValueFactory(
-						new Callback<CellDataFeatures<ObservableList, String>, ObservableValue<String>>() {
-							public ObservableValue<String> call(CellDataFeatures<ObservableList, String> param) {
-								return new SimpleStringProperty(param.getValue().get(j).toString());
-							}
-						});
-
-				ausgabe.getColumns().addAll(col);
-
-			}
-
-			// Ergebnisse verarbeiten
-			while (rs.next()) { // Cursor bewegen
-				ObservableList<String> row = FXCollections.observableArrayList();
-				for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
-					// Iterate Column
-					row.add(rs.getString(i));
-
-				}
-
-				data.add(row);
-			}
-
-			ausgabe.setItems(data);
-			con.commit();
-
-		} catch (PSQLException se) {
-			con.rollback();
-			System.err.println("Error PSQLException");
-			selectText.setText("Error. Bitte korrigieren Sie ihre Eingabe.");
-
-		} catch (Exception se) {
-			con.rollback();
-			System.err.println("Error Exception");
-			selectText.setText("Error. Bitte korrigieren Sie ihre Eingabe.");
-
-		}
-
-	}
 }
