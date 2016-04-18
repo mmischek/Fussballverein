@@ -29,10 +29,10 @@ import javafx.scene.paint.Color;
 import javafx.util.Callback;
 
 /**
- * @date 18.04.2016
+ * date: 18.04.2016
  * @author Matthias Mischek
- * @Version 1.0
- * In dieser Klassen befinden sich alle wichtigen Methoden, welche von der GUI ausgeführt werden
+ * @version 1.0 In dieser Klassen befinden sich alle wichtigen Methoden, welche
+ *          von der GUI ausgeführt werden
  * 
  */
 public class Controller implements Initializable {
@@ -78,12 +78,13 @@ public class Controller implements Initializable {
 	private Connection con;
 
 	/**
-	 * JDBC
-	 * Methode zum Verbinden zur Datenbank Zugangsdaten kann der User für ein
-	 * TextField eingeben
+	 * JDBC Methode zum Verbinden zur Datenbank Zugangsdaten kann der User für
+	 * ein TextField eingeben
 	 * 
 	 * @param event
+	 *            Wenn der Button "Verbinden" gedrückt wird
 	 * @throws SQLException
+	 *             Wirft SQL Exception
 	 */
 	@SuppressWarnings("unchecked")
 	public void connect(ActionEvent event) throws SQLException {
@@ -135,7 +136,9 @@ public class Controller implements Initializable {
 	 * verwendet
 	 * 
 	 * @param event
+	 *            Wenn der Button "Insert" gedrückt wird
 	 * @throws SQLException
+	 *             	wegen Rollback
 	 */
 	public void insert(ActionEvent event) throws SQLException {
 
@@ -152,10 +155,10 @@ public class Controller implements Initializable {
 			con.setAutoCommit(false);
 
 			st.executeUpdate("INSERT INTO Spiel VALUES ('" + dateins + "', '" + mannsIns + "', '" + gegins + "', '"
-					+ ergIns + "')"); //Insert Statement
+					+ ergIns + "')"); // Insert Statement
 
 			hinzText.setText("erfolgreich hinzugefügt!");
-			con.commit(); //Transaktion
+			con.commit(); // Transaktion
 
 		} catch (PSQLException se) {
 			con.rollback();
@@ -175,13 +178,13 @@ public class Controller implements Initializable {
 
 	/**
 	 * Methode zum Laden der Tabelle Person und fügt diese in eine TableView ein
-	 * Den Algorithmus für das Einfügen in eine TableView habe aus folgendem
+ 	 * Den Algorithmus für das Einfügen in eine TableView habe aus folgendem
 	 * Forum:
 	 * 
-	 * @link http://stackoverflow.com/questions/36637532/javafx-using-dynamic-
+	 * link: http://stackoverflow.com/questions/36637532/javafx-using-dynamic-
 	 *       table-view-with-database-editable-cell-problems
-	 * @param event
-	 * @throws SQLException
+	 * @param event	wenn "DB anzeigen" geklickt wird
+	 * @throws SQLException	wegen Rollback
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void anzeige(ActionEvent event) throws SQLException {
@@ -197,13 +200,14 @@ public class Controller implements Initializable {
 			dbeinfugen.setDisable(true);
 			auswahlB.setDisable(false);
 
-			/**Den Algorithmus habe ich aus Folgendem Forum:
-			* 
-			* @link http://stackoverflow.com/questions/36637532/javafx-using-dynamic-
-			*       table-view-with-database-editable-cell-problems
-			*       
-			*/
-	
+			/**
+			 * Den Algorithmus habe ich aus Folgendem Forum:
+			 * 
+			 * link: http://stackoverflow.com/questions/36637532/javafx-using-
+			 *       dynamic- table-view-with-database-editable-cell-problems
+			 * 
+			 */
+
 			for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
 				final int j = i;
 				TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i + 1));
@@ -229,9 +233,9 @@ public class Controller implements Initializable {
 
 				data.add(row);
 			}
-			updateBox.setItems(data);//In ComboBox einfügen
-			anzeige.setItems(data);//In TableView einfügen
-			con.commit(); //Transaktion
+			updateBox.setItems(data);// In ComboBox einfügen
+			anzeige.setItems(data);// In TableView einfügen
+			con.commit(); // Transaktion
 
 		} catch (PSQLException se) {
 			con.rollback();
@@ -252,10 +256,10 @@ public class Controller implements Initializable {
 	 * Den Algorithmus für das Einfügen in eine TableView habe aus folgendem
 	 * Forum:
 	 * 
-	 * @link http://stackoverflow.com/questions/36637532/javafx-using-dynamic-
+	 * link: http://stackoverflow.com/questions/36637532/javafx-using-dynamic-
 	 *       table-view-with-database-editable-cell-problems
-	 * @param event
-	 * @throws SQLException
+	 * @param event	wenn "DB anzeigen" geklickt wird
+	 * @throws SQLException	wegen Rollback
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void anzeigeSpiel(ActionEvent event) throws SQLException {
@@ -272,14 +276,14 @@ public class Controller implements Initializable {
 			dbeinfuegen.setDisable(true);
 			auswahlBspiel.setDisable(false);
 
-			
-			/**Den Algorithmus habe ich aus Folgendem Forum:
-			* 
-			* @link http://stackoverflow.com/questions/36637532/javafx-using-dynamic-
-			*       table-view-with-database-editable-cell-problems
-			*       
-			*/
-			
+			/**
+			 * Den Algorithmus habe ich aus Folgendem Forum:
+			 * 
+			 * @link http://stackoverflow.com/questions/36637532/javafx-using-
+			 *       dynamic- table-view-with-database-editable-cell-problems
+			 * 
+			 */
+
 			for (int i = 0; i < res.getMetaData().getColumnCount(); i++) {
 				final int j = i;
 				TableColumn col = new TableColumn(res.getMetaData().getColumnName(i + 1));
@@ -305,9 +309,9 @@ public class Controller implements Initializable {
 
 				data.add(row);
 			}
-			updateBoxTwo.setItems(data);//In ComboBox einfügen
-			anzeigeTwo.setItems(data);//In TableView einfügen
-			con.commit(); //Transaktion
+			updateBoxTwo.setItems(data);// In ComboBox einfügen
+			anzeigeTwo.setItems(data);// In TableView einfügen
+			con.commit(); // Transaktion
 
 		} catch (PSQLException se) {
 			con.rollback();
@@ -326,8 +330,8 @@ public class Controller implements Initializable {
 	/**
 	 * Methode für das Statement "Update" Ändert Datensätze
 	 * 
-	 * @param event
-	 * @throws SQLException
+	 * @param event	Wenn "Update" geklickt werden
+	 * @throws SQLException	wegen Rollback
 	 */
 	@FXML
 	public void update(ActionEvent event) throws SQLException {
@@ -343,7 +347,7 @@ public class Controller implements Initializable {
 					"UPDATE Spieler SET position=\'" + pos.getText() + "\', gehalt=\'" + cash.getText() + "\', von=\'"
 							+ von.getText() + "\', bis=\'" + bis.getText() + "\' WHERE persnr=\'" + updatear[0] + "\'");
 
-			con.commit(); //Transaktion
+			con.commit(); // Transaktion
 			status2.setText("Datensatz wurde erfolgreich geaendert!");
 		} catch (SQLException se) {
 			con.rollback();
@@ -362,8 +366,8 @@ public class Controller implements Initializable {
 	/**
 	 * Methode für das Statement "Update" Ändert Datensätze
 	 * 
-	 * @param event
-	 * @throws SQLException
+	 * @param event wenn "Update" geklickt wird
+	 * @throws SQLException	wegen Rollback
 	 */
 	@FXML
 	public void updateSpiel(ActionEvent event) throws SQLException {
@@ -380,7 +384,7 @@ public class Controller implements Initializable {
 					+ ergField.getValue() + "\' WHERE datum=\'" + updatear[0] + "\'");
 
 			statusSpiel.setText("Der Datenatz wurde erfolgreich geändert.");
-			con.commit(); //Transaktion
+			con.commit(); // Transaktion
 		} catch (SQLException se) {
 			con.rollback();
 			System.err.println("Update - Error");
@@ -397,7 +401,7 @@ public class Controller implements Initializable {
 	 * Methode für die Auswahl der Datensätze bei Update und Insert ComboBox
 	 * gibt Daten TextField
 	 * 
-	 * @param event
+	 * @param event	wenn "Auswahl" gekilckt wird
 	 */
 	@FXML
 	public void auswahl(ActionEvent event) {
@@ -431,7 +435,7 @@ public class Controller implements Initializable {
 	 * Methode für die Auswahl der Datensätze bei Update und Insert ComboBox
 	 * gibt Daten TextField
 	 * 
-	 * @param event
+	 * @param event	wenn "Auswahl" geklickt wird
 	 */
 	@SuppressWarnings("unchecked")
 	@FXML
@@ -463,8 +467,8 @@ public class Controller implements Initializable {
 	/**
 	 * Löscht Anzeige und Tabelle aus TableView
 	 * 
-	 * @param event
-	 * @throws SQLException
+	 * @param event	wenn "anzeige löschen" geklickt wird
+	 * @throws SQLException wegen rollback
 	 */
 	@FXML
 	public void aktualisieren(ActionEvent event) throws SQLException {
@@ -480,8 +484,8 @@ public class Controller implements Initializable {
 	/**
 	 * Löscht Anzeige und Tabelle aus TableView
 	 * 
-	 * @param event
-	 * @throws SQLException
+	 * @param event wenn "anzeige löschen" geklickt wird
+	 * @throws SQLException wegenRollback
 	 */
 	@FXML
 	public void aktualisierenTwo(ActionEvent event) throws SQLException {
